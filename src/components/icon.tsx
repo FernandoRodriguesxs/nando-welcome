@@ -1,19 +1,105 @@
-import type { CSSProperties } from "react";
+import {
+  ArrowRight,
+  ArrowUp,
+  ArrowUpRight,
+  Award,
+  BadgeCheck,
+  Brain,
+  BrainCircuit,
+  BriefcaseBusiness,
+  CalendarCheck,
+  ChevronDown,
+  CircleCheck,
+  Clock,
+  Cloud,
+  Code,
+  Compass,
+  Database,
+  FolderOpen,
+  Globe,
+  GraduationCap,
+  Hand,
+  Heart,
+  LayoutGrid,
+  Layers,
+  Laptop,
+  Link as LinkIcon,
+  type LucideIcon,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Monitor,
+  Moon,
+  Network,
+  Route,
+  Send,
+  Server,
+  ShieldCheck,
+  Smartphone,
+  Sparkles,
+  Sun,
+  User,
+  X,
+  Zap,
+  AtSign,
+} from "lucide-react";
+
+const icons = {
+  alternate_email: AtSign,
+  arrow_forward: ArrowRight,
+  arrow_outward: ArrowUpRight,
+  arrow_upward: ArrowUp,
+  auto_awesome: Sparkles,
+  bolt: Zap,
+  chat_bubble: MessageCircle,
+  check_circle: CircleCheck,
+  close: X,
+  cloud_sync: Cloud,
+  code: Code,
+  dark_mode: Moon,
+  database: Database,
+  desktop_windows: Monitor,
+  dns: Server,
+  event_available: CalendarCheck,
+  expand_more: ChevronDown,
+  explore: Compass,
+  favorite: Heart,
+  folder_open: FolderOpen,
+  grid_view: LayoutGrid,
+  hub: Network,
+  language: Globe,
+  laptop_mac: Laptop,
+  layers: Layers,
+  light_mode: Sun,
+  link: LinkIcon,
+  location_on: MapPin,
+  mail: Mail,
+  neurology: Brain,
+  north_east: ArrowUpRight,
+  person: User,
+  psychology: BrainCircuit,
+  route: Route,
+  schedule: Clock,
+  school: GraduationCap,
+  send: Send,
+  smartphone: Smartphone,
+  verified: BadgeCheck,
+  verified_user: ShieldCheck,
+  waving_hand: Hand,
+  work_history: BriefcaseBusiness,
+  workspace_premium: Award,
+} satisfies Record<string, LucideIcon>;
+
+export type IconName = keyof typeof icons;
 
 type IconProps = {
-  name: string;
+  name: IconName;
   className?: string;
-  filled?: boolean;
+  strokeWidth?: number;
 };
 
-export function Icon({ name, className = "", filled = false }: IconProps) {
-  const style: CSSProperties | undefined = filled
-    ? { fontVariationSettings: "'FILL' 1" }
-    : undefined;
-
-  return (
-    <span aria-hidden="true" className={`material-symbols-outlined ${className}`} style={style}>
-      {name}
-    </span>
-  );
+// Lucide icons sized by font-size (1em), so text-* size utilities keep working.
+export function Icon({ name, className = "", strokeWidth = 1.75 }: IconProps) {
+  const Svg = icons[name];
+  return <Svg aria-hidden="true" className={`icon ${className}`} size="1em" strokeWidth={strokeWidth} />;
 }

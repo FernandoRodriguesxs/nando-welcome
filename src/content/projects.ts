@@ -1,3 +1,5 @@
+import type { IconName } from "@/components/icon";
+
 export type ProjectCategory = "saas" | "mobile" | "ia";
 
 export type Project = {
@@ -7,8 +9,8 @@ export type Project = {
   description: string;
   image: string;
   imageAlt: string;
-  badge: { icon: string; label: string };
-  highlight?: { icon: string; title: string; subtitle: string; status: string };
+  badge: { icon: IconName; label: string };
+  highlight?: { icon: IconName; title: string; subtitle: string; status: string };
   stack: string[];
   repo: string;
   categories: ProjectCategory[];

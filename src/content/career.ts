@@ -1,5 +1,7 @@
+import type { IconName } from "@/components/icon";
+
 export type StackGroup = {
-  icon: string;
+  icon: IconName;
   title: string;
   subtitle: string;
   badge: { label: string; emphasis: boolean };
@@ -42,7 +44,7 @@ export const stackGroups: StackGroup[] = [
   },
 ];
 
-export const toolGroups = [
+export const toolGroups: { icon: IconName; title: string; subtitle: string; items: string[] }[] = [
   {
     icon: "database",
     title: "Bancos & Persistência",
