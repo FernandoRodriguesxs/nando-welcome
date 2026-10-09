@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import { Icon, type IconName } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
+import { TechTag } from "@/components/tech-tag";
 import { experiences, stackGroups, toolGroups } from "@/content/career";
 
 export const metadata: Metadata = {
@@ -11,9 +12,6 @@ export const metadata: Metadata = {
 
 const glassCard =
   "rounded-lg bg-surface-container-lowest/80 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-white/40 dark:border-white/10";
-const solidChip = "tag tag-accent";
-const softChip = "tag";
-const smallChip = "tag";
 
 const revealDelay = { "--reveal-delay": "120ms" } as CSSProperties;
 
@@ -148,14 +146,10 @@ export default function SkillsPage() {
                 </div>
                 <div className="flex flex-wrap gap-1 pt-1">
                   {group.core.map((tech) => (
-                    <span className={solidChip} key={tech}>
-                      {tech}
-                    </span>
+                    <TechTag accent key={tech} name={tech} />
                   ))}
                   {group.extra.map((tech) => (
-                    <span className={softChip} key={tech}>
-                      {tech}
-                    </span>
+                    <TechTag key={tech} name={tech} />
                   ))}
                 </div>
               </div>
@@ -176,9 +170,7 @@ export default function SkillsPage() {
                   </div>
                   <div className="flex flex-wrap gap-1">
                     {group.items.map((item) => (
-                      <span className={smallChip} key={item}>
-                        {item}
-                      </span>
+                      <TechTag key={item} name={item} />
                     ))}
                   </div>
                 </div>
@@ -229,9 +221,7 @@ export default function SkillsPage() {
                       <p className="font-body-md text-body-md text-on-surface-variant dark:text-neutral-300 mb-space-sm">{job.description}</p>
                       <div className="flex flex-wrap gap-1">
                         {job.tags.map((tag) => (
-                          <span className={smallChip} key={tag}>
-                            {tag}
-                          </span>
+                          <TechTag key={tag} name={tag} />
                         ))}
                       </div>
                     </div>
@@ -265,9 +255,7 @@ export default function SkillsPage() {
                 {item.tags && (
                   <div className="flex flex-wrap gap-1 mt-3">
                     {item.tags.map((tag) => (
-                      <span className={smallChip} key={tag}>
-                        {tag}
-                      </span>
+                      <TechTag key={tag} name={tag} />
                     ))}
                   </div>
                 )}
