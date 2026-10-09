@@ -87,7 +87,7 @@ export default function HomePage() {
           {/* Coluna Esquerda: Conteúdo & Métricas */}
           <div className="lg:col-span-7 flex flex-col items-start gap-7">
             {/* Live Status */}
-            <Reveal
+            <Reveal immediate
               className="inline-flex items-center gap-2 text-[12px] font-medium text-on-surface-variant dark:text-neutral-400">
               <span className="relative flex h-2 w-2 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary dark:bg-emerald-400 opacity-60" />
@@ -100,7 +100,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Headline Principal */}
-            <Reveal className="space-y-4" style={delay(80)}>
+            <Reveal immediate className="space-y-4" style={delay(80)}>
               <h1 className="font-display-hero text-display-hero-mobile md:text-display-hero text-on-surface dark:text-white tracking-tight md:tracking-tight">
                 Engenheiro de Software{" "}
                 <span className="text-primary dark:text-emerald-400 italic font-serif">Full Stack</span> &amp; AI
@@ -114,7 +114,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Ações */}
-            <Reveal className="flex flex-wrap items-center gap-3 pt-2" style={delay(160)}>
+            <Reveal immediate className="flex flex-wrap items-center gap-3 pt-2" style={delay(160)}>
               <Link className="group btn btn-primary px-7 py-3.5" href="/projetos">
                 <span>Explorar Projetos</span>
                 <Icon className="text-lg btn-arrow" name="arrow_forward" />
@@ -145,7 +145,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Áreas de atuação: lista compacta */}
-            <Reveal as="ul"
+            <Reveal immediate as="ul"
               className="w-full max-w-xl pt-4 grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-on-surface/[0.08] dark:divide-white/[0.08] border-t border-on-surface/[0.08] dark:border-white/[0.08]"
              
               style={delay(240)}>
@@ -162,7 +162,7 @@ export default function HomePage() {
           </div>
 
           {/* Coluna Direita: Avatar 3D Glass Showcase */}
-          <Reveal className="lg:col-span-5 relative flex items-center justify-center" style={delay(200)}>
+          <Reveal immediate className="lg:col-span-5 relative flex items-center justify-center" style={delay(200)}>
             <div className="absolute inset-4 bg-gradient-to-tr from-secondary-container/40 via-surface-container-lowest/30 to-primary-container/20 dark:from-emerald-900/30 dark:via-transparent dark:to-emerald-700/20 rounded-xl blur-3xl -z-10" />
 
             <div className="relative w-full max-w-[430px] rounded-xl bg-surface-container-lowest/40 dark:bg-[#141917]/60 backdrop-blur-3xl shadow-xl dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] dark:border dark:border-white/10 p-4 flex flex-col items-center transition-shadow duration-500 hover:shadow-2xl">

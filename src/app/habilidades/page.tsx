@@ -75,7 +75,7 @@ export default function SkillsPage() {
         <div className="absolute -bottom-24 left-10 w-[420px] h-[420px] rounded-full bg-surface-container-high/60 dark:bg-emerald-950/30 blur-[110px] pointer-events-none -z-10" />
 
         {/* Editorial Header Badge & Intro */}
-        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+        <Reveal immediate className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
           <div className="flex flex-col gap-space-xs max-w-2xl">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
               <span className="eyebrow">Carreira &amp; Tecnologias</span>
@@ -112,7 +112,7 @@ export default function SkillsPage() {
         {/* Main Two-Column Bento Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
           {/* COLUMN 1: STACK & COMPETÊNCIAS */}
-          <Reveal className="lg:col-span-7 flex flex-col gap-space-md">
+          <Reveal immediate className="lg:col-span-7 flex flex-col gap-space-md">
             <div className="flex items-center justify-between pb-space-xs">
               <div className="flex items-center gap-2">
                 <Icon className="text-primary dark:text-emerald-400 text-base" name="layers" />
@@ -187,7 +187,7 @@ export default function SkillsPage() {
           </Reveal>
 
           {/* COLUMN 2: LINHA DO TEMPO PROFISSIONAL */}
-          <Reveal className="lg:col-span-5 flex flex-col gap-space-md" id="trajetoria" style={revealDelay}>
+          <Reveal immediate className="lg:col-span-5 flex flex-col gap-space-md" id="trajetoria" style={revealDelay}>
             <div className="flex items-center justify-between pb-space-xs">
               <div className="flex items-center gap-2">
                 <Icon className="text-primary dark:text-emerald-400 text-base" name="route" />

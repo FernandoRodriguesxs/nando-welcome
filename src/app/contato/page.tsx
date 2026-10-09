@@ -27,7 +27,7 @@ export default function ContactPage() {
         <div className="absolute bottom-16 right-10 -z-10 w-[460px] h-[460px] bg-primary-fixed/25 dark:bg-emerald-900/15 rounded-full blur-[120px] pointer-events-none" />
 
         {/* Editorial Intro / Overline */}
-        <Reveal className="flex flex-col md:flex-row items-start md:items-end justify-between gap-space-md mb-space-lg">
+        <Reveal immediate className="flex flex-col md:flex-row items-start md:items-end justify-between gap-space-md mb-space-lg">
           <div className="space-y-space-xs max-w-xl">
             <span className="eyebrow">Canal Direto &amp; Parcerias</span>
             <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-white tracking-tight">
@@ -47,7 +47,7 @@ export default function ContactPage() {
         </Reveal>
 
         {/* Master Glass Canvas Card */}
-        <Reveal as="section" className="relative w-full rounded-xl bg-surface-container-lowest/75 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(43,56,42,0.08),0_2px_4px_rgba(255,255,255,0.9)_inset] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.08)_inset] dark:border dark:border-white/10 overflow-hidden">
+        <Reveal immediate as="section" className="relative w-full rounded-xl bg-surface-container-lowest/75 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(43,56,42,0.08),0_2px_4px_rgba(255,255,255,0.9)_inset] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.08)_inset] dark:border dark:border-white/10 overflow-hidden">
           {/* Specular Refractive Light Bar */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white dark:via-white/30 to-transparent opacity-90" />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-white/40 dark:divide-white/10">
