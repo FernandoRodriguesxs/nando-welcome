@@ -27,13 +27,14 @@ export const viewport: Viewport = {
   ],
 };
 
-// Runs before first paint: stored preference, otherwise the system preference.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();`;
+// Runs before first paint: flags JS for scroll reveals, then applies the stored
+// theme, otherwise the system preference.
+const themeScript = `(function(){document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme: dark)').matches)){document.documentElement.classList.add('dark')}}catch(e){}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      className={`${inter.variable} scroll-smooth transition-colors duration-500`}
+      className={`${inter.variable} scroll-smooth`}
       data-scroll-behavior="smooth"
       lang="pt-BR"
       suppressHydrationWarning
@@ -41,7 +42,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="bg-background dark:bg-[#0B0F0E] font-body-md text-on-surface dark:text-[#EAEFEA] antialiased selection:bg-secondary-container dark:selection:bg-emerald-950/70 selection:text-on-secondary-container dark:selection:text-emerald-200 min-h-screen flex flex-col transition-colors duration-500">
+      <body className="bg-background dark:bg-[#0B0F0E] font-body-md text-on-surface dark:text-[#EAEFEA] antialiased selection:bg-secondary-container dark:selection:bg-emerald-950/70 selection:text-on-secondary-container dark:selection:text-emerald-200 min-h-screen flex flex-col">
         <SiteHeader />
         <main className="w-full flex-1 pt-16">{children}</main>
         <SiteFooter />
