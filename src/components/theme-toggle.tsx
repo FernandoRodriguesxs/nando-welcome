@@ -38,7 +38,7 @@ export function ThemeToggle() {
       <span
         // A named view transition lets the knob glide across instead of cross-fading.
         style={{ viewTransitionName: "theme-knob" }}
-        className="relative z-10 w-6 h-6 rounded-full bg-white dark:bg-[#1E2522] shadow-[0_2px_6px_rgba(0,0,0,0.18),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] translate-x-0 dark:translate-x-8 transition-transform duration-500 ease-soft flex items-center justify-center border border-black/5 dark:border-white/10">
+        className="relative z-10 w-6 h-6 rounded-full bg-surface-container-lowest dark:bg-[#1E2522] shadow-[0_2px_6px_rgba(0,0,0,0.18),inset_0_1px_1px_rgba(255,255,255,0.8)] dark:shadow-[0_2px_8px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] translate-x-0 dark:translate-x-8 transition-transform duration-500 ease-soft flex items-center justify-center border border-black/5 dark:border-white/10">
         <Icon className="text-[13px] text-amber-600 dark:hidden" name="light_mode" />
         <Icon className="text-[13px] text-emerald-400 hidden dark:inline-block" name="dark_mode" />
       </span>
