@@ -10,7 +10,6 @@ export const links = {
   github: "https://github.com/FernandoRodriguesxs",
   linkedin: "https://www.linkedin.com/in/fernandorodrigues-dev",
   email: "fernando.hardd@gmail.com",
-  currentPortfolio: "https://nando-port.vercel.app/",
 };
 
 export function isActivePath(pathname: string, href: string) {

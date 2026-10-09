@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
-import { Icon, type IconName } from "@/components/icon";
+import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
 import { LiveClock } from "@/components/live-clock";
 import { links } from "@/lib/site";
@@ -12,15 +12,9 @@ export const metadata: Metadata = {
   description: "Vamos construir algo juntos? Canais diretos e formulário de contato de Fernando Rodrigues.",
 };
 
-const quickLinks: {
-  href: string;
-  label: string;
-  brand?: typeof GithubIcon;
-  icon?: IconName;
-}[] = [
-  { href: links.linkedin, label: "LinkedIn", brand: LinkedinIcon },
-  { href: links.github, label: "GitHub", brand: GithubIcon },
-  { href: links.currentPortfolio, label: "Portfólio atual", icon: "language" },
+const quickLinks = [
+  { href: links.linkedin, label: "LinkedIn", Brand: LinkedinIcon },
+  { href: links.github, label: "GitHub", Brand: GithubIcon },
 ];
 
 export default function ContactPage() {
@@ -140,11 +134,7 @@ export default function ContactPage() {
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        {link.brand ? (
-                          <link.brand className="w-3.5 h-3.5" />
-                        ) : (
-                          <Icon className="text-[15px]" name={link.icon ?? "link"} />
-                        )}
+                        <link.Brand className="w-3.5 h-3.5" />
                         {link.label}
                         <Icon
                           className="text-[13px] opacity-0 -translate-x-1 transition-[opacity,transform] duration-300 group-hover:opacity-60 group-hover:translate-x-0"
