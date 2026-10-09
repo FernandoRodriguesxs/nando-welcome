@@ -89,6 +89,20 @@
   animation-delay: var(--reveal-delay, 0ms);
 }
 
+/* Phones: skip the costliest GPU effects inside the page body. The huge blurred
+   light orbs and per-card backdrop blur are barely visible over the solid
+   background but slow down painting and scrolling. Header, menu and chat keep theirs. */
+@media (max-width: 767px) {
+  main .\-z-10[class*="blur"] {
+    display: none;
+  }
+
+  main [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 /* Theme switch cross-fade (View Transitions API). */
 ::view-transition-old(root),
 ::view-transition-new(root) {
