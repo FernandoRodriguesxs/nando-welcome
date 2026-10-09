@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Icon } from "@/components/icon";
+import type { CSSProperties } from "react";
+import { Icon, type IconName } from "@/components/icon";
+import { Reveal } from "@/components/reveal";
 import { experiences, stackGroups, toolGroups } from "@/content/career";
 
 export const metadata: Metadata = {
@@ -9,12 +11,11 @@ export const metadata: Metadata = {
 
 const glassCard =
   "rounded-lg bg-surface-container-lowest/80 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] border border-white/40 dark:border-white/10";
-const solidChip =
-  "px-space-sm py-1 rounded-full bg-primary dark:bg-emerald-600 text-on-primary font-label-sm text-label-sm font-medium shadow-sm";
-const softChip =
-  "px-space-sm py-1 rounded-full bg-surface-container-high/60 dark:bg-white/[0.08] text-on-surface dark:text-neutral-200 font-label-sm text-label-sm";
-const smallChip =
-  "px-2 py-0.5 rounded-full bg-surface-container dark:bg-white/[0.08] text-on-surface dark:text-neutral-200 font-label-sm text-label-sm";
+const solidChip = "tag tag-accent";
+const softChip = "tag";
+const smallChip = "tag";
+
+const revealDelay = { "--reveal-delay": "120ms" } as CSSProperties;
 
 // Timeline dots fade from the current role to the oldest one.
 const timelineDots = [
@@ -25,7 +26,15 @@ const timelineDots = [
   "w-2 h-2 rounded-full bg-outline-variant dark:bg-neutral-600",
 ];
 
-const highlights = [
+const highlights: {
+  icon: IconName;
+  meta: string;
+  title: string;
+  subtitle: string;
+  detail?: string;
+  tags?: string[];
+  hobbies?: string[];
+}[] = [
   {
     icon: "school",
     meta: "2021 — 2022",
@@ -66,14 +75,11 @@ export default function SkillsPage() {
         <div className="absolute -bottom-24 left-10 w-[420px] h-[420px] rounded-full bg-surface-container-high/60 dark:bg-emerald-950/30 blur-[110px] pointer-events-none -z-10" />
 
         {/* Editorial Header Badge & Intro */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
+        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-xl">
           <div className="flex flex-col gap-space-xs max-w-2xl">
-            <div className="flex flex-wrap items-center gap-space-xs">
-              <span className="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-container-highest/60 dark:bg-white/[0.08] backdrop-blur-xl text-primary dark:text-emerald-400 font-label-sm text-label-sm shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400 animate-pulse" />
-                CARREIRA &amp; TECNOLOGIAS
-              </span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400 tracking-wider uppercase">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="eyebrow">Carreira &amp; Tecnologias</span>
+              <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-500 tracking-wider uppercase">
                 Full Stack &amp; IA Aplicada
               </span>
             </div>
@@ -85,24 +91,28 @@ export default function SkillsPage() {
               Artificial aplicada.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-space-sm p-space-xs rounded-[2rem] sm:rounded-full bg-surface-container-lowest/70 dark:bg-[#141917]/80 backdrop-blur-2xl shadow-sm dark:border dark:border-white/10 self-start md:self-auto">
-            <div className="flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container-low/80 dark:bg-white/[0.06]">
-              <Icon className="text-primary dark:text-emerald-400 text-lg" filled name="code" />
-              <span className="font-title-md text-title-md font-semibold text-on-surface dark:text-white">Full Stack</span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400">Web &amp; Mobile</span>
+          <dl className="flex items-stretch divide-x divide-on-surface/[0.08] dark:divide-white/[0.08] self-start md:self-auto">
+            <div className="pr-5">
+              <dt className="flex items-center gap-1.5 text-[14px] font-semibold text-on-surface dark:text-white">
+                <Icon className="text-primary dark:text-emerald-400 text-[16px]" name="code" />
+                Full Stack
+              </dt>
+              <dd className="text-[12px] text-on-surface-variant dark:text-neutral-400 mt-0.5">Web &amp; Mobile</dd>
             </div>
-            <div className="flex items-center gap-2 px-space-md py-1.5 rounded-full bg-surface-container-low/80 dark:bg-white/[0.06]">
-              <Icon className="text-primary dark:text-emerald-400 text-lg" filled name="psychology" />
-              <span className="font-title-md text-title-md font-semibold text-on-surface dark:text-white">IA</span>
-              <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400">Sistemas &amp; Agentes</span>
+            <div className="pl-5">
+              <dt className="flex items-center gap-1.5 text-[14px] font-semibold text-on-surface dark:text-white">
+                <Icon className="text-primary dark:text-emerald-400 text-[16px]" name="psychology" />
+                IA
+              </dt>
+              <dd className="text-[12px] text-on-surface-variant dark:text-neutral-400 mt-0.5">Sistemas &amp; Agentes</dd>
             </div>
-          </div>
-        </div>
+          </dl>
+        </Reveal>
 
         {/* Main Two-Column Bento Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
           {/* COLUMN 1: STACK & COMPETÊNCIAS */}
-          <div className="lg:col-span-7 flex flex-col gap-space-md">
+          <Reveal className="lg:col-span-7 flex flex-col gap-space-md">
             <div className="flex items-center justify-between pb-space-xs">
               <div className="flex items-center gap-2">
                 <Icon className="text-primary dark:text-emerald-400 text-base" name="layers" />
@@ -115,7 +125,7 @@ export default function SkillsPage() {
 
             {stackGroups.map((group) => (
               <div
-                className={`${glassCard} p-space-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5`}
+                className={`${glassCard} p-space-lg transition-[transform,box-shadow] duration-500 hover:shadow-lg hover:-translate-y-0.5`}
                 key={group.title}
               >
                 <div className="flex items-start justify-between gap-space-sm mb-space-sm">
@@ -129,16 +139,14 @@ export default function SkillsPage() {
                     </div>
                   </div>
                   <span
-                    className={
-                      group.badge.emphasis
-                        ? "px-space-sm py-0.5 rounded-full bg-primary/10 dark:bg-emerald-500/15 text-primary dark:text-emerald-300 font-label-sm text-label-sm font-semibold shrink-0"
-                        : "px-space-sm py-0.5 rounded-full bg-surface-container-highest/60 dark:bg-white/[0.08] text-primary dark:text-emerald-300 font-label-sm text-label-sm shrink-0"
-                    }
+                    className={`text-[11px] font-semibold uppercase tracking-wider shrink-0 ${
+                      group.badge.emphasis ? "text-primary dark:text-emerald-400" : "text-on-surface-variant dark:text-neutral-500"
+                    }`}
                   >
                     {group.badge.label}
                   </span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 pt-1">
+                <div className="flex flex-wrap gap-1 pt-1">
                   {group.core.map((tech) => (
                     <span className={solidChip} key={tech}>
                       {tech}
@@ -156,7 +164,7 @@ export default function SkillsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-space-md">
               {toolGroups.map((group) => (
                 <div
-                  className={`${glassCard} p-space-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between`}
+                  className={`${glassCard} p-space-md hover:shadow-lg transition-shadow duration-500 flex flex-col justify-between`}
                   key={group.title}
                 >
                   <div className="mb-space-sm">
@@ -176,10 +184,10 @@ export default function SkillsPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
           {/* COLUMN 2: LINHA DO TEMPO PROFISSIONAL */}
-          <div className="lg:col-span-5 flex flex-col gap-space-md" id="trajetoria">
+          <Reveal className="lg:col-span-5 flex flex-col gap-space-md" id="trajetoria" style={revealDelay}>
             <div className="flex items-center justify-between pb-space-xs">
               <div className="flex items-center gap-2">
                 <Icon className="text-primary dark:text-emerald-400 text-base" name="route" />
@@ -205,14 +213,12 @@ export default function SkillsPage() {
                         <span className={timelineDots[index] ?? timelineDots[timelineDots.length - 1]!} />
                       )}
                     </div>
-                    <div className="rounded-lg bg-surface-container-lowest/85 dark:bg-[#141917]/80 backdrop-blur-2xl p-space-md shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] dark:border dark:border-white/10 hover:shadow-lg transition-all duration-300">
+                    <div className="rounded-lg bg-surface-container-lowest/85 dark:bg-[#141917]/80 backdrop-blur-2xl p-space-md shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] dark:border dark:border-white/10 hover:shadow-lg transition-shadow duration-500">
                       <div className="flex flex-wrap items-center justify-between gap-1 mb-1">
                         <span
-                          className={
-                            current
-                              ? "px-2.5 py-0.5 rounded-full bg-primary dark:bg-emerald-600 text-on-primary font-label-sm text-label-sm font-semibold tracking-wide"
-                              : "px-2.5 py-0.5 rounded-full bg-surface-container-highest dark:bg-white/[0.08] text-on-surface-variant dark:text-neutral-300 font-label-sm text-label-sm font-medium"
-                          }
+                          className={`text-[12px] font-semibold ${
+                            current ? "text-primary dark:text-emerald-400" : "text-on-surface-variant dark:text-neutral-400"
+                          }`}
                         >
                           {job.period}
                         </span>
@@ -233,16 +239,16 @@ export default function SkillsPage() {
                 );
               })}
             </div>
-          </div>
+          </Reveal>
         </div>
 
         {/* BOTTOM HIGHLIGHT CARD: CERTIFICAÇÕES & RECONHECIMENTOS */}
-        <div className="mt-space-xl rounded-lg bg-surface-container-lowest/90 dark:bg-[#141917]/85 backdrop-blur-3xl p-space-lg shadow-xl dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] dark:border dark:border-white/10 relative overflow-hidden">
+        <Reveal className="mt-space-xl rounded-lg bg-surface-container-lowest/90 dark:bg-[#141917]/85 backdrop-blur-3xl p-space-lg shadow-xl dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] dark:border dark:border-white/10 relative overflow-hidden">
           <div className="absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-primary/10 dark:bg-emerald-500/10 blur-[90px] pointer-events-none" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
             {highlights.map((item) => (
               <div
-                className="p-space-md rounded-lg bg-surface-container-low/70 dark:bg-white/[0.04] backdrop-blur-md flex flex-col justify-between hover:bg-surface-container-high/60 dark:hover:bg-white/[0.08] transition-all duration-200 border border-white/30 dark:border-white/10"
+                className="p-space-md rounded-lg bg-surface-container-low/70 dark:bg-white/[0.04] backdrop-blur-md flex flex-col justify-between hover:bg-surface-container-high/60 dark:hover:bg-white/[0.08] transition-colors duration-500 border border-white/30 dark:border-white/10"
                 key={item.title}
               >
                 <div>
@@ -266,12 +272,9 @@ export default function SkillsPage() {
                   </div>
                 )}
                 {item.hobbies && (
-                  <div className="flex flex-wrap gap-1.5 mt-3">
+                  <div className="flex flex-wrap gap-1 mt-3">
                     {item.hobbies.map((hobby) => (
-                      <span
-                        className="px-2.5 py-1 rounded-full bg-surface-container-highest/60 dark:bg-white/[0.08] text-on-surface dark:text-neutral-200 font-label-sm text-label-sm font-medium"
-                        key={hobby}
-                      >
+                      <span className="tag" key={hobby}>
                         {hobby}
                       </span>
                     ))}
@@ -280,7 +283,7 @@ export default function SkillsPage() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
       </div>
     </div>
   );
