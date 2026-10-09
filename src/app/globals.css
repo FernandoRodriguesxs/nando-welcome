@@ -2,31 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Material Symbols Outlined";
-  font-style: normal;
-  font-weight: 100 700;
-  font-display: block;
-  src: url("./fonts/material-symbols-outlined.woff2") format("woff2");
-}
-
 @layer base {
-  .material-symbols-outlined {
-    font-family: "Material Symbols Outlined";
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-    letter-spacing: normal;
-    text-transform: none;
+  /* Lucide SVG icons: sized by font-size so text-* utilities control them. */
+  .icon {
     display: inline-block;
-    white-space: nowrap;
-    word-wrap: normal;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    font-feature-settings: "liga";
+    flex-shrink: 0;
+    font-size: 24px;
   }
 
   html,
@@ -49,6 +30,87 @@
 
   [id] {
     scroll-margin-top: 6rem;
+  }
+}
+
+@layer components {
+  /* Buttons: a quiet 1px lift, softer shadow and a small tint shift on hover. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-label-md text-label-md font-semibold whitespace-nowrap transition-[transform,box-shadow,background-color,color,border-color] duration-300 ease-soft hover:-translate-y-px active:translate-y-0 active:duration-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 dark:focus-visible:ring-emerald-400/40;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-on-primary shadow-[0_6px_16px_-8px_rgba(66,86,65,0.55)] hover:bg-[#4a5f48] hover:shadow-[0_12px_24px_-10px_rgba(66,86,65,0.55)] dark:bg-emerald-600 dark:shadow-[0_6px_16px_-8px_rgba(16,185,129,0.4)] dark:hover:bg-emerald-500 dark:hover:shadow-[0_12px_24px_-10px_rgba(16,185,129,0.45)];
+  }
+
+  .btn-glass {
+    @apply border border-white/60 bg-surface-container-lowest/70 text-on-surface shadow-[0_2px_8px_-4px_rgba(43,56,42,0.12)] backdrop-blur-xl hover:bg-surface-container-lowest hover:shadow-[0_10px_22px_-12px_rgba(43,56,42,0.3)] dark:border-white/10 dark:bg-white/[0.06] dark:text-[#EAEFEA] dark:shadow-none dark:hover:bg-white/[0.1];
+  }
+
+  .btn-arrow {
+    @apply transition-transform duration-300 ease-soft group-hover:translate-x-0.5;
+  }
+
+  /* Tags: compact and quiet, so they support the content instead of shouting. */
+  .tag {
+    @apply inline-flex items-center gap-1.5 rounded-md border border-on-surface/[0.08] bg-surface-container-lowest/60 px-1.5 py-0.5 text-[11px] font-medium leading-4 text-on-surface-variant dark:border-white/[0.08] dark:bg-white/[0.03] dark:text-neutral-400;
+  }
+
+  .tag-accent {
+    @apply text-on-surface before:h-1 before:w-1 before:shrink-0 before:rounded-full before:bg-primary before:content-[''] dark:text-neutral-200 dark:before:bg-emerald-400;
+  }
+
+  /* Section overline: a small dot + uppercase label, no pill. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-label-sm text-label-sm font-semibold uppercase tracking-wider text-secondary before:h-1.5 before:w-1.5 before:rounded-full before:bg-primary before:content-[''] dark:text-emerald-400 dark:before:bg-emerald-400;
+  }
+}
+
+/* Scroll reveal: elements with [data-reveal] fade up once they enter the viewport.
+   Only applies when JS runs (html.js), and never with reduced motion. */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.js [data-reveal]:not(.is-visible) {
+  opacity: 0;
+}
+
+.js [data-reveal].is-visible {
+  animation: reveal-up 800ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+/* Theme switch cross-fade (View Transitions API). */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-group(theme-knob) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 1;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
   }
 }
 

@@ -86,14 +86,41 @@ const config: Config = {
         "display-hero-mobile": inter,
         "body-md": inter,
       },
+      transitionTimingFunction: {
+        DEFAULT: "cubic-bezier(0.22, 1, 0.36, 1)",
+        soft: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+      transitionDuration: {
+        DEFAULT: "300ms",
+      },
       keyframes: {
         "card-in": {
           from: { opacity: "0", transform: "translateY(12px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        "page-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "panel-in": {
+          from: { opacity: "0", transform: "translateY(12px) scale(0.98)" },
+          to: { opacity: "1", transform: "translateY(0) scale(1)" },
+        },
+        "message-in": {
+          from: { opacity: "0", transform: "translateY(6px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
+        "typing-dot": {
+          "0%, 60%, 100%": { opacity: "0.25", transform: "translateY(0)" },
+          "30%": { opacity: "1", transform: "translateY(-2px)" },
+        },
       },
       animation: {
-        "card-in": "card-in 300ms ease-out",
+        "card-in": "card-in 500ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "page-in": "page-in 450ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "panel-in": "panel-in 320ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "message-in": "message-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both",
+        "typing-dot": "typing-dot 1.2s ease-in-out infinite",
       },
       fontSize: {
         "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.02em", fontWeight: "600" }],

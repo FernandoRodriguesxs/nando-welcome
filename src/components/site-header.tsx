@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { isActivePath, navItems } from "@/lib/site";
 import { ThemeToggle } from "./theme-toggle";
 
-const linkBase = "px-space-md py-1.5 rounded-full transition-all duration-200";
+const linkBase = "px-space-md py-1.5 rounded-full transition-[background-color,color,box-shadow] duration-300";
 const linkIdle =
   "font-label-md text-label-md text-on-surface-variant dark:text-neutral-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container-highest/40 dark:hover:bg-white/10";
 const linkActive =
@@ -47,7 +47,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-space-sm pr-space-xs">
           <Link
-            className="hidden sm:inline-flex items-center justify-center px-space-md py-2 rounded-full font-label-md text-label-md font-semibold text-on-surface dark:text-[#EAEFEA] bg-surface-container-lowest/80 dark:bg-white/[0.08] hover:bg-surface-container-lowest dark:hover:bg-white/[0.14] hover:text-on-surface border border-white/40 dark:border-white/10 shadow-[0_4px_16px_rgba(43,56,42,0.06),inset_0_1px_1px_rgba(255,255,255,0.9)] dark:shadow-[0_4px_16px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.1)] hover:shadow-[0_6px_20px_rgba(43,56,42,0.1)] transition-all duration-200"
+            className="btn btn-glass hidden sm:inline-flex px-space-md py-2"
             href="/contato"
           >
             Vamos Conversar
