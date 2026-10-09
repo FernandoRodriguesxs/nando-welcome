@@ -5,7 +5,8 @@ import { Faq } from "@/components/faq";
 import { Icon } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
 import { LiveClock } from "@/components/live-clock";
-import { links } from "@/lib/site";
+import { LocationMap, mapsUrl } from "@/components/location-map";
+import { links, location } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contato & Parcerias",
@@ -104,19 +105,34 @@ export default function ContactPage() {
                         name="arrow_outward"
                       />
                     </a>
-                    <div className="flex items-center justify-between gap-space-sm p-3 rounded bg-surface-container-lowest/60 dark:bg-white/[0.05] text-on-surface dark:text-white shadow-sm dark:border dark:border-white/10">
-                      <div className="flex items-center gap-space-sm">
-                        <div className="w-8 h-8 shrink-0 rounded-full bg-surface-container-high/60 dark:bg-white/[0.08] flex items-center justify-center text-primary dark:text-emerald-400">
-                          <Icon className="text-[18px]" name="location_on" />
-                        </div>
-                        <div className="flex flex-col">
-                          <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400">Localização</span>
-                          <span className="font-body-md text-body-md text-on-surface dark:text-white font-medium">São Paulo, Brasil</span>
-                        </div>
+                    <div className="rounded overflow-hidden bg-surface-container-lowest/60 dark:bg-white/[0.05] text-on-surface dark:text-white shadow-sm dark:border dark:border-white/10">
+                      <div className="relative h-36 bg-surface-container dark:bg-neutral-900">
+                        <LocationMap />
                       </div>
-                      <span className="font-label-sm text-label-sm text-secondary dark:text-emerald-400 font-medium text-right">
-                        Presencial &amp; Remoto
-                      </span>
+                      <div className="flex items-center justify-between gap-space-sm p-3">
+                        <div className="flex items-center gap-space-sm">
+                          <div className="w-8 h-8 shrink-0 rounded-full bg-surface-container-high/60 dark:bg-white/[0.08] flex items-center justify-center text-primary dark:text-emerald-400">
+                            <Icon className="text-[18px]" name="location_on" />
+                          </div>
+                          <div className="flex flex-col">
+                            <span className="font-label-sm text-label-sm text-on-surface-variant dark:text-neutral-400">
+                              Localização · Presencial &amp; Remoto
+                            </span>
+                            <span className="font-body-md text-body-md text-on-surface dark:text-white font-medium">
+                              {location.label}
+                            </span>
+                          </div>
+                        </div>
+                        <a
+                          className="group inline-flex items-center gap-1 text-[12px] font-semibold text-primary dark:text-emerald-400 hover:underline underline-offset-4 shrink-0"
+                          href={mapsUrl}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          Abrir no Maps
+                          <Icon className="text-[14px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" name="arrow_outward" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
