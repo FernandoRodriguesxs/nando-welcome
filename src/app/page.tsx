@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
+import { JiuJitsuCard, RunningCard } from "@/components/hobbies";
 import { Icon, type IconName } from "@/components/icon";
 import { Reveal } from "@/components/reveal";
 import { links } from "@/lib/site";
@@ -246,6 +247,29 @@ export default function HomePage() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Hobbies */}
+      <section className="w-full max-w-[1320px] mx-auto px-gutter-mobile md:px-margin pb-24">
+        <Reveal className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div className="space-y-3">
+            <span className="eyebrow">Hobbies</span>
+            <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-white tracking-tight">
+              Além do código
+            </h2>
+          </div>
+          <p className="font-body-md text-body-md text-on-surface-variant dark:text-neutral-400 max-w-md">
+            O que me mantém em movimento fora do editor: tatame e asfalto.
+          </p>
+        </Reveal>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Reveal>
+            <JiuJitsuCard />
+          </Reveal>
+          <Reveal style={delay(90)}>
+            <RunningCard />
+          </Reveal>
         </div>
       </section>
 
