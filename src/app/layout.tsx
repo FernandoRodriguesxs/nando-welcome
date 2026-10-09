@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { ChatWidget } from "@/components/chat-widget";
 import { MobileNav } from "@/components/mobile-nav";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
@@ -47,6 +48,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <main className="w-full flex-1 pt-16">{children}</main>
         <SiteFooter />
         <MobileNav />
+        <ChatWidget />
       </body>
     </html>
   );
