@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import { GithubIcon, LinkedinIcon } from "@/components/brand-icons";
 import { ContactForm } from "@/components/contact-form";
 import { Faq } from "@/components/faq";
-import { Icon } from "@/components/icon";
+import { Icon, type IconName } from "@/components/icon";
+import { Reveal } from "@/components/reveal";
 import { LiveClock } from "@/components/live-clock";
 import { links } from "@/lib/site";
 
@@ -10,9 +12,14 @@ export const metadata: Metadata = {
   description: "Vamos construir algo juntos? Canais diretos e formulário de contato de Fernando Rodrigues.",
 };
 
-const quickLinks = [
-  { href: links.linkedin, label: "LinkedIn", mark: "in" },
-  { href: links.github, label: "GitHub", mark: "gh" },
+const quickLinks: {
+  href: string;
+  label: string;
+  brand?: typeof GithubIcon;
+  icon?: IconName;
+}[] = [
+  { href: links.linkedin, label: "LinkedIn", brand: LinkedinIcon },
+  { href: links.github, label: "GitHub", brand: GithubIcon },
   { href: links.currentPortfolio, label: "Portfólio atual", icon: "language" },
 ];
 
@@ -25,14 +32,9 @@ export default function ContactPage() {
         <div className="absolute bottom-16 right-10 -z-10 w-[460px] h-[460px] bg-primary-fixed/25 dark:bg-emerald-900/15 rounded-full blur-[120px] pointer-events-none" />
 
         {/* Editorial Intro / Overline */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-space-md mb-space-lg">
+        <Reveal className="flex flex-col md:flex-row items-start md:items-end justify-between gap-space-md mb-space-lg">
           <div className="space-y-space-xs max-w-xl">
-            <div className="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-high/60 dark:bg-white/[0.06] backdrop-blur-md shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400 animate-ping" />
-              <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary dark:text-emerald-400 font-semibold">
-                Canal Direto &amp; Parcerias
-              </span>
-            </div>
+            <span className="eyebrow">Canal Direto &amp; Parcerias</span>
             <h1 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-white tracking-tight">
               Contato &amp; Parcerias
             </h1>
@@ -41,16 +43,16 @@ export default function ContactPage() {
               desenvolvimento de software e Inteligência Artificial.
             </p>
           </div>
-          <div className="flex items-center gap-space-sm font-label-md text-label-md text-on-surface-variant dark:text-neutral-400 bg-surface-container-lowest/80 dark:bg-[#141917]/85 dark:border dark:border-white/10 px-space-md py-2 rounded-full shadow-sm backdrop-blur-md">
-            <Icon className="text-primary dark:text-emerald-400 text-[18px]" name="schedule" />
+          <div className="flex items-center gap-2 text-[13px] text-on-surface-variant dark:text-neutral-400">
+            <Icon className="text-primary dark:text-emerald-400 text-[16px]" name="schedule" />
             <span>
               Horário atual: <LiveClock />
             </span>
           </div>
-        </div>
+        </Reveal>
 
         {/* Master Glass Canvas Card */}
-        <section className="relative w-full rounded-xl bg-surface-container-lowest/75 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(43,56,42,0.08),0_2px_4px_rgba(255,255,255,0.9)_inset] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.08)_inset] dark:border dark:border-white/10 overflow-hidden">
+        <Reveal as="section" className="relative w-full rounded-xl bg-surface-container-lowest/75 dark:bg-[#141917]/75 backdrop-blur-2xl shadow-[0_32px_64px_-16px_rgba(43,56,42,0.08),0_2px_4px_rgba(255,255,255,0.9)_inset] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5),0_1px_1px_rgba(255,255,255,0.08)_inset] dark:border dark:border-white/10 overflow-hidden">
           {/* Specular Refractive Light Bar */}
           <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-white dark:via-white/30 to-transparent opacity-90" />
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-white/40 dark:divide-white/10">
@@ -75,10 +77,10 @@ export default function ContactPage() {
                     <span className="font-label-sm text-label-sm uppercase text-secondary dark:text-emerald-400 font-semibold">
                       Status Profissional
                     </span>
-                    <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-secondary-container/80 dark:bg-emerald-950/80 dark:border dark:border-emerald-500/20 text-on-secondary-container dark:text-emerald-300 font-label-sm text-label-sm font-semibold">
-                      <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400" />
+                    <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-primary dark:text-emerald-400">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400 animate-pulse" />
                       Ativo
-                    </div>
+                    </span>
                   </div>
                   <p className="font-body-md text-body-md text-on-surface dark:text-neutral-200 font-medium text-sm">
                     Atualmente na Adalink • Aberto para novas conexões e desafios
@@ -91,11 +93,11 @@ export default function ContactPage() {
                   </span>
                   <div className="space-y-2">
                     <a
-                      className="group flex items-center justify-between gap-space-sm p-3 rounded bg-surface-container-lowest/60 dark:bg-white/[0.05] hover:bg-surface-container-lowest dark:hover:bg-white/[0.09] text-on-surface dark:text-white transition-all duration-200 shadow-sm dark:border dark:border-white/10"
+                      className="group flex items-center justify-between gap-space-sm p-3 rounded bg-surface-container-lowest/60 dark:bg-white/[0.05] hover:bg-surface-container-lowest dark:hover:bg-white/[0.09] text-on-surface dark:text-white transition-[background-color,box-shadow] duration-300 shadow-sm hover:shadow-md dark:border dark:border-white/10"
                       href={`mailto:${links.email}`}
                     >
                       <div className="flex items-center gap-space-sm min-w-0">
-                        <div className="w-8 h-8 shrink-0 rounded-full bg-surface-container-high/60 dark:bg-white/[0.08] flex items-center justify-center text-primary dark:text-emerald-400 group-hover:scale-105 transition-transform">
+                        <div className="w-8 h-8 shrink-0 rounded-full bg-surface-container-high/60 dark:bg-white/[0.08] flex items-center justify-center text-primary dark:text-emerald-400">
                           <Icon className="text-[18px]" name="alternate_email" />
                         </div>
                         <div className="flex flex-col min-w-0">
@@ -104,7 +106,7 @@ export default function ContactPage() {
                         </div>
                       </div>
                       <Icon
-                        className="text-outline dark:text-neutral-500 group-hover:translate-x-1 group-hover:text-primary dark:group-hover:text-emerald-400 transition-all text-[18px]"
+                        className="text-outline dark:text-neutral-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary dark:group-hover:text-emerald-400 transition-[transform,color] duration-300 text-[18px]"
                         name="arrow_outward"
                       />
                     </a>
@@ -129,21 +131,25 @@ export default function ContactPage() {
                   <span className="font-label-sm text-label-sm uppercase text-outline dark:text-neutral-500 font-semibold tracking-wide">
                     Links Rápidos
                   </span>
-                  <div className="flex flex-wrap gap-2 pt-1">
+                  <div className="flex flex-wrap gap-x-5 gap-y-2 pt-1">
                     {quickLinks.map((link) => (
                       <a
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-lowest/80 dark:bg-white/[0.06] hover:bg-surface-container-high/70 dark:hover:bg-white/10 text-on-surface dark:text-neutral-200 font-label-md text-label-md transition-all shadow-sm dark:border dark:border-white/10"
+                        className="group inline-flex items-center gap-1.5 text-[13px] font-medium text-on-surface-variant dark:text-neutral-400 hover:text-on-surface dark:hover:text-white transition-colors duration-300"
                         href={link.href}
                         key={link.label}
                         rel="noopener noreferrer"
                         target="_blank"
                       >
-                        {link.icon ? (
-                          <Icon className="text-[14px]" name={link.icon} />
+                        {link.brand ? (
+                          <link.brand className="w-3.5 h-3.5" />
                         ) : (
-                          <span className="font-semibold text-xs tracking-tight">{link.mark}</span>
-                        )}{" "}
+                          <Icon className="text-[15px]" name={link.icon ?? "link"} />
+                        )}
                         {link.label}
+                        <Icon
+                          className="text-[13px] opacity-0 -translate-x-1 transition-[opacity,transform] duration-300 group-hover:opacity-60 group-hover:translate-x-0"
+                          name="arrow_outward"
+                        />
                       </a>
                     ))}
                   </div>
@@ -164,18 +170,13 @@ export default function ContactPage() {
               <ContactForm />
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* Process & FAQ */}
-        <div className="mt-space-xl pt-space-md">
+        <Reveal className="mt-space-xl pt-space-md">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-space-sm mb-space-lg">
             <div className="space-y-space-xs max-w-lg">
-              <div className="inline-flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-high/60 dark:bg-white/[0.06] backdrop-blur-md shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400 animate-ping" />
-                <span className="font-label-sm text-label-sm uppercase tracking-wider text-secondary dark:text-emerald-400 font-semibold">
-                  Processo &amp; FAQ
-                </span>
-              </div>
+              <span className="eyebrow">Processo &amp; FAQ</span>
               <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface dark:text-white tracking-tight">
                 Perguntas Frequentes
               </h2>
@@ -185,10 +186,10 @@ export default function ContactPage() {
             </p>
           </div>
           <Faq />
-        </div>
+        </Reveal>
 
         {/* Supplementary Spatial Studio Badge */}
-        <div className="mt-space-xl p-space-lg rounded-xl bg-surface-container-low/40 dark:bg-[#141917]/60 dark:border dark:border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left">
+        <Reveal className="mt-space-xl p-space-lg rounded-xl bg-surface-container-low/40 dark:bg-[#141917]/60 dark:border dark:border-white/10 backdrop-blur-xl flex flex-col md:flex-row items-center justify-between gap-space-md text-center md:text-left">
           <div className="flex flex-col md:flex-row items-center gap-space-md">
             <div className="w-12 h-12 shrink-0 rounded-full bg-surface-container-lowest dark:bg-white/[0.08] shadow-sm flex items-center justify-center text-primary dark:text-emerald-400">
               <Icon className="text-[24px]" name="verified" />
@@ -202,13 +203,11 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
-          <a
-            className="px-space-md py-2 rounded-full bg-surface-container-lowest dark:bg-white/[0.08] text-on-surface dark:text-white font-label-md text-label-md font-semibold hover:bg-surface-container-highest dark:hover:bg-white/[0.14] transition-colors shadow-sm dark:border dark:border-white/10 whitespace-nowrap"
-            href={`mailto:${links.email}`}
-          >
+          <a className="group btn btn-glass px-space-md py-2" href={`mailto:${links.email}`}>
             Conversar Diretamente
+            <Icon className="text-[16px] btn-arrow" name="arrow_forward" />
           </a>
-        </div>
+        </Reveal>
       </div>
     </div>
   );
