@@ -3,15 +3,15 @@
 import Image from "next/image";
 import { type ReactNode, useEffect, useState } from "react";
 import { type Project, type ProjectCategory, projectFilters, projects } from "@/content/projects";
+import { GithubIcon } from "./brand-icons";
 import { Icon } from "./icon";
 
 type Filter = ProjectCategory | "all";
 
 const cardBase =
-  "project-card group rounded-lg bg-surface-container-lowest/80 dark:bg-[#141917]/75 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-xl transition-all duration-500 overflow-hidden relative";
+  "project-card group rounded-lg bg-surface-container-lowest/80 dark:bg-[#141917]/75 backdrop-blur-2xl border border-white/20 dark:border-white/10 shadow-md dark:shadow-[0_8px_30px_rgba(0,0,0,0.4)] hover:shadow-xl transition-[opacity,transform,box-shadow] duration-500 overflow-hidden relative";
 
-const chip =
-  "px-2.5 py-1 rounded-full bg-secondary-container/40 dark:bg-emerald-950/50 text-on-secondary-container dark:text-emerald-300 dark:border dark:border-emerald-500/20 font-label-sm text-label-sm";
+const chip = "tag";
 
 const filterIdle =
   "text-on-surface-variant dark:text-neutral-400 hover:text-on-surface dark:hover:text-white hover:bg-surface-container-high/40 dark:hover:bg-white/10";
@@ -31,7 +31,7 @@ export function ProjectFilter({ value, onChange }: { value: Filter; onChange: (v
       {projectFilters.map((filter) => (
         <button
           aria-pressed={value === filter.value}
-          className={`px-space-md py-2 rounded-full font-label-md text-label-md transition-all duration-200 whitespace-nowrap ${
+          className={`px-space-md py-2 rounded-full font-label-md text-label-md transition-[background-color,color,box-shadow] duration-300 whitespace-nowrap ${
             value === filter.value ? filterActive : filterIdle
           }`}
           key={filter.value}
@@ -46,30 +46,19 @@ export function ProjectFilter({ value, onChange }: { value: Filter; onChange: (v
 }
 
 function GithubLink({ href, featured }: { href: string; featured: boolean }) {
-  if (featured) {
-    return (
-      <a
-        className="inline-flex items-center justify-between w-full px-space-md py-3 rounded-full bg-surface-container-lowest dark:bg-white/[0.08] hover:bg-primary dark:hover:bg-emerald-600 hover:text-on-primary dark:hover:text-white text-on-surface dark:text-[#EAEFEA] font-title-md text-title-md font-medium border border-white/30 dark:border-white/10 shadow-sm transition-all duration-300 group/btn"
-        href={href}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        <span>Ver no GitHub</span>
-        <Icon className="group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1 transition-transform" name="north_east" />
-      </a>
-    );
-  }
-
   return (
     <a
-      className="inline-flex items-center justify-between w-full px-space-md py-2.5 rounded-full bg-surface-container-low dark:bg-white/[0.08] hover:bg-primary dark:hover:bg-emerald-600 hover:text-on-primary dark:hover:text-white text-on-surface dark:text-[#EAEFEA] border border-transparent dark:border-white/10 font-label-md text-label-md font-semibold transition-all duration-300 group/link"
+      className={`group btn btn-glass w-full justify-between px-space-md ${featured ? "py-3 text-[15px]" : "py-2.5"}`}
       href={href}
       rel="noopener noreferrer"
       target="_blank"
     >
-      <span>Ver no GitHub</span>
+      <span className="inline-flex items-center gap-2">
+        <GithubIcon className="w-4 h-4" />
+        Ver no GitHub
+      </span>
       <Icon
-        className="text-title-md group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform"
+        className="text-[18px] transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
         name="north_east"
       />
     </a>
@@ -83,16 +72,16 @@ function FeaturedCard({ project, index }: { project: Project; index: number }) {
         <div className="relative w-full h-80 sm:h-96 lg:h-full min-h-[380px] rounded overflow-hidden bg-surface-container-low dark:bg-neutral-900 shadow-inner">
           <Image
             alt={project.imageAlt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover"
             fill
             priority
             sizes="(min-width: 1024px) 720px, 100vw"
             src={project.image}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 dark:from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
-          <div className="absolute top-space-md left-space-md flex items-center gap-2 px-space-sm py-1 rounded-full bg-surface-container-lowest/85 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-primary dark:bg-emerald-400 animate-pulse" />
-            <span className="font-label-sm text-label-sm text-on-surface dark:text-white font-medium">
+          <div className="absolute inset-0 bg-gradient-to-t from-inverse-surface/60 dark:from-black/70 via-transparent to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-700" />
+          <div className="absolute top-space-md left-space-md flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container-lowest/85 dark:bg-black/55 backdrop-blur-xl border border-white/30 dark:border-white/10">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400 animate-pulse" />
+            <span className="text-[11px] leading-4 text-on-surface dark:text-white font-medium">
               {project.badge.label}
             </span>
           </div>
@@ -109,7 +98,8 @@ function FeaturedCard({ project, index }: { project: Project; index: number }) {
                   </p>
                 </div>
               </div>
-              <span className="font-label-sm text-label-sm text-primary dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full bg-primary-fixed dark:bg-emerald-950/80 border border-transparent dark:border-emerald-500/20">
+              <span className="inline-flex items-center gap-1.5 text-[11px] leading-4 font-semibold text-primary dark:text-emerald-300">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-emerald-400" />
                 {project.highlight.status}
               </span>
             </div>
@@ -128,7 +118,7 @@ function FeaturedCard({ project, index }: { project: Project; index: number }) {
             {project.name}
           </h2>
           <p className="font-body-md text-body-md text-on-surface-variant dark:text-neutral-300">{project.description}</p>
-          <div className="flex flex-wrap gap-1.5 pt-space-xs">
+          <div className="flex flex-wrap gap-1 pt-space-xs">
             {project.stack.map((tech) => (
               <span className={chip} key={tech}>
                 {tech}
@@ -151,15 +141,15 @@ function CompactCard({ project, index }: { project: Project; index: number }) {
         <div className="relative w-full h-64 rounded overflow-hidden bg-surface-container-low dark:bg-neutral-900 shadow-inner">
           <Image
             alt={project.imageAlt}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover"
             fill
             sizes="(min-width: 768px) 600px, 100vw"
             src={project.image}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-on-surface/40 dark:from-black/60 via-transparent to-transparent" />
-          <div className="absolute top-3 right-3 px-space-sm py-1 rounded-full bg-surface-container-lowest/90 dark:bg-black/60 backdrop-blur-md border border-white/30 dark:border-white/10 shadow-sm flex items-center gap-1.5">
-            <Icon className="text-primary dark:text-emerald-400 text-label-md" name={project.badge.icon} />
-            <span className="font-label-sm text-label-sm text-on-surface dark:text-white font-semibold">
+          <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-surface-container-lowest/85 dark:bg-black/55 backdrop-blur-md border border-white/30 dark:border-white/10 flex items-center gap-1">
+            <Icon className="text-primary dark:text-emerald-400 text-[13px]" name={project.badge.icon} />
+            <span className="text-[11px] leading-4 text-on-surface dark:text-white font-medium">
               {project.badge.label}
             </span>
           </div>
@@ -175,7 +165,7 @@ function CompactCard({ project, index }: { project: Project; index: number }) {
             {project.name}
           </h3>
           <p className="font-body-md text-body-md text-on-surface-variant dark:text-neutral-300">{project.description}</p>
-          <div className="flex flex-wrap gap-1.5 pt-space-xs">
+          <div className="flex flex-wrap gap-1 pt-space-xs">
             {project.stack.map((tech) => (
               <span className={chip} key={tech}>
                 {tech}

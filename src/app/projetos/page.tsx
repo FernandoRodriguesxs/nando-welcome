@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@/components/icon";
+import { Reveal } from "@/components/reveal";
 import { ProjectsShowcase } from "@/components/projects-grid";
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ export default function ProjectsPage() {
         />
 
         {/* Bottom Spatial Callout Capsule */}
-        <aside className="mt-space-xl p-space-lg rounded-xl bg-surface-container-low/70 dark:bg-[#141917]/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
+        <Reveal as="aside" className="mt-space-xl p-space-lg rounded-xl bg-surface-container-low/70 dark:bg-[#141917]/70 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-sm flex flex-col md:flex-row items-center justify-between gap-space-md">
           <div className="flex items-center gap-space-md">
             <div className="w-12 h-12 rounded-full bg-primary-container/20 dark:bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
               <Icon className="text-primary dark:text-emerald-400 text-headline-md" name="auto_awesome" />
@@ -49,13 +50,11 @@ export default function ProjectsPage() {
               </p>
             </div>
           </div>
-          <Link
-            className="px-space-lg py-3 rounded-full bg-primary dark:bg-emerald-600 text-on-primary hover:bg-primary-container dark:hover:bg-emerald-500 font-label-md text-label-md font-semibold shadow-md hover:shadow-lg transition-all duration-200 whitespace-nowrap"
-            href="/contato"
-          >
+          <Link className="group btn btn-primary px-space-lg py-3" href="/contato">
             Iniciar Conversa
+            <Icon className="text-[18px] btn-arrow" name="arrow_forward" />
           </Link>
-        </aside>
+        </Reveal>
       </div>
     </div>
   );
