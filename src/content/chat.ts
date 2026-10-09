@@ -36,7 +36,7 @@ export const chatTopics: ChatTopic[] = [
       "O Fernando é Engenheiro de Software Full Stack com foco em IA aplicada, baseado em São Paulo.",
       "Hoje ele desenvolve aplicações e soluções com LLMs na Adalink, cuidando de APIs, interfaces, automações e integrações via WhatsApp.",
     ],
-    next: ["stack", "projetos", "contato"],
+    next: ["stack", "projetos", "hobbies"],
   },
   {
     id: "stack",
@@ -88,6 +88,19 @@ export const chatTopics: ChatTopic[] = [
     ],
     action: { label: "Ver trajetória", href: "/habilidades#trajetoria" },
     next: ["stack", "disponibilidade"],
+  },
+  {
+    id: "hobbies",
+    label: "E fora do código?",
+    icon: "favorite",
+    keywords: ["hobby", "hobbies", "hobbie", "jiu", "jitsu", "jiujitsu", "faixa", "corrida", "correr", "strava", "esporte", "treino", "lazer"],
+    answer: [
+      "Fora do código ele treina jiu-jitsu, atualmente faixa branca com 1 grau.",
+      "E corre com frequência, com os treinos registrados no Strava.",
+    ],
+    tags: ["Jiu-jitsu", "Corrida", "Strava"],
+    action: { label: "Ver no Strava", href: links.strava, external: true },
+    next: ["sobre", "contato"],
   },
   {
     id: "disponibilidade",

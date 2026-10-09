@@ -23,6 +23,8 @@ type Message = {
 
 const topicById = new Map(chatTopics.map((topic) => [topic.id, topic]));
 const MAX_SUGGESTIONS = 4;
+const actionLink =
+  "group inline-flex items-center gap-1 text-[12px] font-semibold text-primary dark:text-emerald-400 hover:underline underline-offset-4";
 
 function prefersReducedMotion() {
   return typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -99,15 +101,23 @@ function BotBubble({ message, typed, onProgress, onTyped }: {
                 {tag}
               </span>
             ))}
-            {message.action && (
-              <Link
-                className="group inline-flex items-center gap-1 text-[12px] font-semibold text-primary dark:text-emerald-400 hover:underline underline-offset-4"
-                href={message.action.href}
-              >
-                {message.action.label}
-                <Icon className="text-[14px] btn-arrow" name="arrow_forward" />
-              </Link>
-            )}
+            {message.action &&
+              (message.action.external ? (
+                <a
+                  className={actionLink}
+                  href={message.action.href}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {message.action.label}
+                  <Icon className="text-[14px] btn-arrow" name="arrow_outward" />
+                </a>
+              ) : (
+                <Link className={actionLink} href={message.action.href}>
+                  {message.action.label}
+                  <Icon className="text-[14px] btn-arrow" name="arrow_forward" />
+                </Link>
+              ))}
           </div>
         )}
       </div>
