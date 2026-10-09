@@ -10,6 +10,13 @@ export const links = {
   github: "https://github.com/FernandoRodriguesxs",
   linkedin: "https://www.linkedin.com/in/fernandorodrigues-dev",
   email: "fernando.hardd@gmail.com",
+  strava: "https://www.strava.com/athletes/162871265",
+};
+
+// City-level only: the map shows the region, never a street address.
+export const location = {
+  label: "São Paulo, Brasil",
+  mapQuery: "São Paulo, SP, Brasil",
 };
 
 export function isActivePath(pathname: string, href: string) {
